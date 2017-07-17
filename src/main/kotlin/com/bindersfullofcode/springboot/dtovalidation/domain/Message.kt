@@ -11,7 +11,7 @@ data class Message(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id : Long = -1,
-        val content: String,
-        val to: String,
+        var content: String,
+        var to: String,
         val createdAt: Date = Date()) {
 }

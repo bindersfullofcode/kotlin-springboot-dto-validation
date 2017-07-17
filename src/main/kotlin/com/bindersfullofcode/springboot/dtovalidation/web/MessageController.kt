@@ -23,4 +23,19 @@ class MessageController @Autowired constructor (val messageRepository: MessageRe
 
         messageRepository.save(message)
     }
+
+    @PutMapping("/{messageId}")
+    fun updateMessage(@PathVariable messageId: Long, @RequestBody @Validated messageDto: MessageDTO) {
+        val message = messageRepository.findOne(messageId)
+
+        message?.let {
+            it.to = messageDto.to
+            it.content = messageDto.content
+
+            messageRepository.save(message)
+        }
+    }
+
+    @DeleteMapping("/{messageId}")
+    fun deleteMessage(@PathVariable messageId: Long) = messageRepository.delete(messageId)
 }
